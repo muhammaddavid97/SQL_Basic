@@ -74,3 +74,66 @@ SELECT * FROM populasi WHERE kota = ANY (SELECT ibukota FROM daftar_provinsi)
 
 SELECT EXISTS (SELECT * FROM populasi WHERE kota = 'Jakarta')  -- true
 SELECT EXISTS (SELECT * FROM populasi WHERE kota = 'Lampung') --  false
+
+-- menampilkan seluruh data pada table populasi dimana kondisi kota pada table populasi berdasarkan perintah EXISTS melalui subquery
+
+-- hasilnya tidak ada data yang ditampilkan karena tidak ada data lampung di kolom ibukota
+SELECT * FROM populasi WHERE kota EXISTS(SELECT ibukota FROM daftar_provinsi WHERE ibukota = 'Lampung')
+
+SELECT * FROM populasi 
+WHERE kota
+EXISTS(
+	SELECT ibukota FROM daftar_provinsi 
+  	WHERE ibukota = 'Medan'
+)
+
+-- not exists merupakan perintah yang berfungsi untuk menegasikan perintah exists
+SELECT NOT EXISTS (SELECT ibukota FROM daftar_provinsi WHERE ibukota = 'Lampung') -- true
+SELECT NOT EXISTS (SELECT ibukota FROM daftar_provinsi WHERE ibukota = 'Medan') -- false
+
+
+/*
+    SELECT WHERE BETWEEN digunakan untuk membuat seleksi atau kondisi berdasarkan jangkauan(range). format query sebagai berikut
+    SELECT nama_kolom FROM nama_table WHERE kondisi BETWEEN nilai_1 AND nilai_2
+*/
+
+-- menampilkan isi tabel populasi dimana nilai kolom kecamatan antara 20 dan 30
+SELECT * FROM populasi WHERE kec BETWEEN 20 AND 30
+
+--menampilkan isi tabel populasi dimana nilai kolom penduduk antara 1.000.000 dan 2.000.000:
+SELECT * FROM populasi WHERE penduduk BETWEEN 10000 AND 20000
+
+-- NOT BETWEEN perintah yang berfungsi untuk menegasikan perintah BETWEEN
+
+--menampilkan isi tabel populasi dimana nilai kolom penduduk bukan diantara 1.000.000 dan 2.000.000:
+SELECT * FROM populasi WHERE penduduk NOT BETWEEN 1000000 AND 2000000
+
+-- menampilkan seluruh data populasi berdasarkan kondisi dimana kolom kota berada diantara bekasi dan medan
+SELECT * FROM populasi WHERE kota BETWEEN 'Bandung' AND 'Medan' ORDER BY kota ASC;
+
+-- menampilkan tabel daftar_provinsi dimana tanggal diresmikan antara 09-08-1957 hingga 01-01-2017:
+SELECT * FROM  daftar_provinsi WHERE tanggal_diresmikan BETWEEN '1957-08-09' AND '2017-01-01'
+
+/*
+Tampilkan isi tabel daftar_provinsi dimana tanggal diresmikan antara 09-08-1957 hingga
+01-01-2017, serta tidak termasuk salah satu dari kota ‘Denpasar’, ‘Jakarta’, dan ‘Medan
+*/
+SELECT * FROM daftar_provinsi 
+WHERE 
+(tanggal_diresmikan BETWEEN '1957-08-09' AND '2017-01-01' ) 
+AND 
+ibukota NOT IN ('Denpasar', 'Jakarta', 'Medan')
+
+SELECT * FROM daftar_provinsi 
+WHERE 
+(tanggal_diresmikan BETWEEN '1957-09-09' AND '2917-01-01')
+AND 
+ibukota
+NOT EXISTS (
+	SELECT ibukota
+  	FROM 
+  	daftar_provinsi
+  	IN 
+  	('Denpasar', 'Jakarta', 'Medan')
+)
+
