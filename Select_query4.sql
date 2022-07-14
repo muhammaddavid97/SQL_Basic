@@ -56,3 +56,29 @@ SELECT COUNT(*) FROM mahasiswa WHERE kel =  'P'
 
 -- menampilkan  nilai_uan terkecil dan nilai_uan terbesar
 SELECT MIN(nilai_uan), MAX(nilai_uan) FROM mahasiswa
+
+-- menampilkan kolom nama dan asal yang memiliki nilai_uan tertinggi dan terendah
+SELECT name AS 'Nama mahasiswa', asal AS 'Asal kota'
+FROM 
+mahasiswa
+WHERE
+nilai_uan = (
+  SELECT 
+  MAX(nilai_uan)
+  FROM mahasiswa
+)
+
+-- menampilkan nama, asal dan jurusan yang memiliki data tinggi terendah
+SELECT name AS 'Nama mahasiswa', asal AS 'Asal kota', jurusan AS 'Program studi'
+FROM 
+mahasiswa
+WHERE
+tinggi = 
+(
+	SELECT MIN(tinggi)
+  	FROM
+  	mahasiswa
+)
+
+-- menggunakan aggregate function pada query distinct
+SELECT COUNT(DISTINCT jurusan) FROM mahasiswa
