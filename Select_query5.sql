@@ -52,13 +52,14 @@ INSERT INTO universitas VALUES
 ('Hukum', '1983-08-08', 'Prof. Gunarto, M.H.', 754, 'B');
 
 /*
-   SELECT JOIN query yang berfungsi untuk menggabungkan beberapa table. terdapat 3 jenis dari query JOIN
-    - INNER JOIN
-    - RIGHT JOIN
-    - LEFT JOIN
+   SELECT JOIN query yang berfungsi untuk menggabungkan beberapa table dengan syarat nilainya harus ada yang sama antar table yang ingin digabung.
+   terdapat 3 jenis dari query JOIN :
+    - INNER JOIN => mengambil nilai dari kolom yang menjadi kunci di kedua table kemudian tampilkan nilai yang sama saja.
+    - RIGHT JOIN => mengambil nilai dari kolom yang menjadi kunci di kedua table kemudian tampilkan seluruh kolom sebelah kanan 
+    - LEFT JOIN =>  mengambil nilai dari kolom yang menjadi kunci di kedua table kemudian tampilkan seluruh kolom sebelah kiri
     
     format query :
-    SELECT nama_kolom FROM nama_table1 JOIN nama_tabl2 WHERE table1.kolom1 = table2.kolom2
+    SELECT nama_kolom FROM nama_table1 JOIN nama_tabl2 ON table1.kolom1 = table2.kolom2
 */
 
 -- menampilkan kolom nama dan jurusan dari tabel mahasiswa, serta kolom dekan dari tabel universitas.
@@ -70,3 +71,48 @@ mahasiswa AS mhs,
 universitas AS univ
 WHERE mhs.jurusan = univ.jurusan
 ORDER by mhs.name DESC
+
+-- cara kedua penggabungan table menggunakan query INNER JOIN
+SELECT mhs.name, mhs.jurusan, univ.nama_dekan
+FROM 
+mahasiswa AS mhs
+INNER JOIN
+universitas AS univ
+ON mhs.jurusan = univ.jurusan
+
+-- menggunakan RIGHT JOIN untuk penggabungan table
+SELECT mhs.name AS 'Nama mahasiswa', mhs.jurusan AS 'Jurusan', univ.nama_dekan 'Dekan fakultas'
+FROM 
+mahasiswa AS mhs
+RIGHT JOIN
+universitas AS univ
+ON mhs.jurusan = univ.jurusan
+ORDER BY univ.nama_dekan ASC
+
+-- menggunakan query LEFT JOIN untuk menampilkan seluruh data pada table sebelah kiri
+SELECT mhs.name, mhs.jurusan, univ.nama_dekan
+FROM 
+mahasiswa AS mhs
+LEFT JOIN
+universitas 
+AS univ
+ON mhs.jurusan = univ.jurusan
+ORDER BY univ.nama_dekan DESC
+
+-- menampilkan seluruh data hasil dari LEFT JOIN dimana data yang ditampilkan yang nama_dekan adalah null
+SELECT mhs.name, mhs.jurusan, univ.nama_dekan
+FROM 
+mahasiswa AS mhs
+LEFT JOIN
+universitas AS univ
+ON mhs.jurusan = univ.jurusan
+WHERE univ.nama_dekan is NULL
+
+
+SELECT prov.prov, prov.ibukota, pop.kel, pop.kec
+FROM 
+daftar_provinsi AS prov
+LEFT JOIN
+Populasi AS pop
+ON prov.ibukota = pop.kota
+ORDER BY pop.kel AND pop.kec
