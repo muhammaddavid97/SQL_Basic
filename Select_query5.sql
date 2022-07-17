@@ -51,3 +51,22 @@ INSERT INTO universitas VALUES
 ('Fisika', '1989-12-10', 'Dr. Umar Agustinus, M.Sc.', 275, 'A'),
 ('Hukum', '1983-08-08', 'Prof. Gunarto, M.H.', 754, 'B');
 
+/*
+   SELECT JOIN query yang berfungsi untuk menggabungkan beberapa table. terdapat 3 jenis dari query JOIN
+    - INNER JOIN
+    - RIGHT JOIN
+    - LEFT JOIN
+    
+    format query :
+    SELECT nama_kolom FROM nama_table1 JOIN nama_tabl2 WHERE table1.kolom1 = table2.kolom2
+*/
+
+-- menampilkan kolom nama dan jurusan dari tabel mahasiswa, serta kolom dekan dari tabel universitas.
+
+-- Cara pertama penggabungan table menggunakan query WHERE
+SELECT mhs.name, mhs.jurusan, univ.nama_dekan
+FROM 
+mahasiswa AS mhs, 
+universitas AS univ
+WHERE mhs.jurusan = univ.jurusan
+ORDER by mhs.name DESC
