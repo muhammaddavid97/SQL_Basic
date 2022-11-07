@@ -33,6 +33,8 @@ ALTER TABLE contoh_alter01 MODIFY a tinyint AUTO_INCREMENT;
 
 DESC contoh_alter01;
 
+
+
 /*
   ALTER TABLE CHANGE => berfungsi untuk mengubah nama kolom sekaligus tipe datanya
   
@@ -43,3 +45,25 @@ DESC contoh_alter01;
 ALTER TABLE contoh_copy1 CHANGE c d timestamp;
 
 DESC contoh_copy1;
+
+
+/*
+  Alter table ... ADD => Berfungsi untuk menambahkan kolom baru ke dalam table
+  
+  syntax berikut : 
+  	ALTER TABLE nama_table ADD COLUMN nama_column tipe_kolom [attribut_kolom] 
+*/
+
+ALTER TABLE contoh_alter1 ADD COLUMN c decimal(4,2) NOT NULL;
+
+DESC contoh_alter1;
+
+/*
+  ALTER TABLE ... DROP => Berfungsi untuk menghapus kolom pada table
+  
+  syntax berikut : 
+  	ALTER TABLE nama_table DROP COLUMN nama_kolom [RESTRICT | CASCADE]
+*/
+
+ALTER TABLE contoh_alter1 DROP COLUMN c RESTRICT;
+
