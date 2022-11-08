@@ -49,3 +49,26 @@ SELECT * FROM mahasiswa_baru;
 
 --mengubah nilai_uan menjadi 100 untuk mahasiswa yang memiliki nilai_uan kurang dari 300. Berikut querynya
 UPDATE mahasiswa_baru SET nilai_uan = 100 WHERE nilai_uan < 300;
+
+-- Membuat table universitas
+CREATE TABLE universitas (
+	jurusan varchar(20) Not null,
+  	tgl_berdiri timestamp not null,
+  	nama_dekan varchar(30) not null,
+  	jumlah_mahasiswa int not null,
+  	akr char(1) not null
+);
+
+INSERT INTO universitas VALUES 
+('kimia', '1987-07-12', 'Prof. Mulyono, M.Sc', 662, 'B'),
+('Ilmu Komputer', '2003-02-23', 'Dr. Syahrial, M.Kom', 412, 'A'),
+('Akuntansi', '1985-03-19', 'Maya Fitrianti, M.M', 895, 'B'),
+('Farmasi', '1997-05-30', ' Prof. Silvia Nst, M.Farm', 312, 'C'),
+('Fisika', '1989-12-10', 'Dr. Umar Agustinus, M.Sc.', 275, 'A'),
+('Hukum', '1983-08-08', 'Prof. Gunarto, M.H', 754, 'B');
+
+-- Ubah kota asal di tabel mahasiswa_baru menjadi Pekanbaru untuk mahasiswa yang memilih jurusan dengan nama dekan Prof. Mulyono, M.Sc.
+UPDATE mahasiswa_baru AS mhs JOIN universitas AS univ 
+SET asal = 'Pekanbaru'
+WHERE mhs.jurusan = univ.jurusan 
+AND univ.nama_dekan = 'Prof. Mulyono, M.Sc';
