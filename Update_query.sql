@@ -40,3 +40,12 @@ jurusan = 'Teknik Industri'
 WHERE 
 nim = '17090113'
 
+
+SELECT * FROM mahasiswa_baru WHERE jurusan = 'Ilmu Komputer' ORDER BY nama DESC LIMIT 2;
+-- Lakukan proses update terhadapa kolom jurusan berdasarkan query diatas 
+UPDATE mahasiswa_baru SET jurusan = 'Teknik Informatika' WHERE jurusan = 'Ilmu Komputer' ORDER BY nama DESC LIMIT 2;
+
+SELECT * FROM mahasiswa_baru;
+
+--mengubah nilai_uan menjadi 100 untuk mahasiswa yang memiliki nilai_uan kurang dari 300. Berikut querynya
+UPDATE mahasiswa_baru SET nilai_uan = 100 WHERE nilai_uan < 300;
