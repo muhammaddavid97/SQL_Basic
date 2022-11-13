@@ -95,3 +95,26 @@ ALTER TABLE mahasiswa ADD INDEX (jurusan);
 -- membuat index untuk kolom jurusan dan nama_dekan pada table universitas
 ALTER TABLE universitas ADD INDEX (jurusan);
 ALTER TABLE universitas ADD INDEX (nama_dekan);
+
+-- hasil dari query dibawah menandakan bahwa column jurusan, nama_dekan di kedua table sudah dapat dilakukan proses pencarian yg lebih cepat
+-- karena sudah memanfaatkan sebuah index.
+EXPLAIN SELECT mhs.nama, mhs.jurusan, univ.nama_dekan
+FROM mahasiswa AS mhs 
+JOIN universitas AS univ ON mhs.jurusan = univ.jurusan
+WHERE nama_dekan = 'Maya Fitrianti, M.M';
+
+/*
+  FULLTEXT Index adalah jenis index khusus yang menyediakan fitur pencarian. index jenis ini hanya bisa dipakai untuk kolom
+  yang memiliki tipe data char, varchar atau text
+  
+  syntax query : 
+    SELECT nama_kolom FROM nama_table WHERE MATCH(nama_kolom) AGAINST (pencarian);
+*/
+
+-- mencari judul artikel yang mengandung kata 'PHP' dengan query Like 
+SELECT * from artikel WHERE judul like '%PHP%';
+
+-- menambahkan FULLTEXT Index ke dalam kolom judul 
+ALTER TABLE artikel ADD FULLTEXT (judul);
+
+SELECT * FROM artikel WHERE MATCH(judul) AGAINST('PHP');
