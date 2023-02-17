@@ -78,5 +78,26 @@
     -- menampilkan string dimana karakternya berisi aaa99
     SELECT 'aaa99' RGLIKE 'a{3}9{2}'
     
-    
+   Selain membatasi jumlah karakter regex juga dapat menentukan jangkauan jumlah karakter
+   Dengan cara menempatkan 2 digit angka didalam {} seperti {2, 4} angka pertama menunjukan
+   jumlah minimum sedangkan angka kedua menunjukan jumlah maksimum
+   
+   -- menampilkan data provinsi dimana nama ibukota memiliki 3 huruf a dan maksimal 4
+   SELECT * FROM Provinsi WHERE ibukota RGLIKE 'a{2,4}
+*/
+
+/*
+  Beberapa karakter khusus pada regex : 
+    - * berfungsi seperti {0,} Artinya cocok dengan 0 atau lebih karakter(tidak dibatasi)
+    - + berfungsi seperti {1,} Artinya cocok dengan 1 karakter atau lebih(tidak dibatasi)
+    - ? berfungsi seperti {0,1} Artinya cocok dengan 0 atau 1 karakter(tidak boleh lebih)
+   
+   -- menampilkan data provinsi dimana nama ibukota diawali dengan huruf j, kemudian diikuti dengan tanpa atau beberapa huruf a dan diakhiri dengan a
+   SELECT * FROM Provinsi WHERE ibukota RLIKE 'ja*a'
+   
+   -- menampilkan data provinsi dimana nama ibukota diawali dengan huruf S kemudian diikuti dengan minimal satu huruf u atau lebih dan diakhiri dengan a
+   SELECT * FROM Provinsi WHERE ibukota RLIKE 'Su+a'
+   
+   
+   
 */
