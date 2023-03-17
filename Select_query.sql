@@ -56,6 +56,13 @@ SELECT * FROM populasi ORDER BY kel DESC;
 -- menampilkan data kota dan penduduk berdasarkan urutan pada kolom luas secara desceding
 SELECT kota AS 'Nama kota', penduduk AS 'Total penduduk' FROM populasi ORDER BY luas DESC;
 
+-- menampilkan data mulai dari populasi yang paling sedikit hingga yang paling besar
+SELECT * FROM populasi ORDER BY penduduk ASC
+
+-- tampilan diatas diurutkan mulai dari kota yang punya kecamatan paling banyak hingga paling kecil
+SELECT kota FROM populasi ORDER BY kec DESC
+
+
 /*
 	SELECT TOP digunakan untuk membatasi data yang ingin ditampilkan. format query 
     
@@ -73,9 +80,9 @@ SELECT TOP 5 * FROM populasi ORDER BY kel AS 'Kelurahan' DESC
 OFFSET offset_row_count {ROW | ROWS}
 FETCH {FIRST | NEXT} fetch_row_count {ROW | ROWS} ONLY
 
-- Klausa OFFSETmenentukan jumlah baris yang akan dilewati sebelum mulai mengembalikan baris dari kueri. offset_row_countBisa berupa konstanta, variabel, atau parameter yang lebih besar atau sama dengan nol .
-- Klausa FETCHmenentukan jumlah baris yang akan dikembalikan setelah OFFSETklausa diproses. Can fetch_row_countadalah konstanta, variabel atau skalar yang lebih besar atau sama dengan satu.
--Klausa OFFSETbersifat wajib sedangkan FETCHklausa bersifat opsional. Juga, FIRSTdan NEXTadalah sinonim masing-masing sehingga Anda dapat menggunakannya secara bergantian. Demikian pula, Anda dapat menggunakan  FIRSTdan NEXTsecara bergantian.
+- Klausa OFFSET menentukan jumlah baris yang akan dilewati sebelum mulai mengembalikan baris dari kueri. offset_row_countBisa berupa konstanta, variabel, atau parameter yang lebih besar atau sama dengan nol .
+- Klausa FETCH menentukan jumlah baris yang akan dikembalikan setelah OFFSETklausa diproses. Can fetch_row_countadalah konstanta, variabel atau skalar yang lebih besar atau sama dengan satu.
+-Klausa OFFSET bersifat wajib sedangkan FETCHklausa bersifat opsional. Juga, FIRSTdan NEXTadalah sinonim masing-masing sehingga Anda dapat menggunakannya secara bergantian. Demikian pula, Anda dapat menggunakan  FIRSTdan NEXTsecara bergantian.
 
 klausa fetch dan offset sering digunakan untuk proses paggination pada data
  
