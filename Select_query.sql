@@ -64,37 +64,24 @@ SELECT kota FROM populasi ORDER BY kec DESC
 
 
 /*
-	SELECT TOP digunakan untuk membatasi data yang ingin ditampilkan. format query 
-    
-    SELECT TOP number | percent column name 
-    FROM nama_table
-    ORDER BY | WHERE 
+  SELECT LIMIT digunakan untuk membatasi jumlah data yang akan ditampilkan biasanya query ini dipakai 
+  bersama ORDER BY untuk menampilkan sedikit data yang sudah diurutkan berdasarkan kolom tertentu
+  
+  syntax query :
+  	SELECT * FROM nama_table ORDER BY nama_kolom LIMIT jumlah_data
+	
+  Jika perintah limit terdiri dari 2 angka maka angka pertama menyatakan jumlah baris yang dilewati
+  sedangkan angka kedua menyatakan jumlah baris yang ditampilkan
 */
 
-SELECT TOP 5 * FROM populasi ORDER BY kel AS 'Kelurahan' DESC
+-- menampilkan 5 provinsi dengan jumlah kelurahan tertinggi dari tabel populasi
+SELECT * FROM populasi ORDER BY kel DESC LIMIT 5
 
-/*
- OFFSETdan FETCHklausa adalah pilihan dari ORDER BYklausa. Mereka memungkinkan Anda untuk membatasi jumlah baris yang akan dikembalikan oleh kueri . berikut format penulisan query
- 
- ORDER BY column_list [ASC |DESC]
-OFFSET offset_row_count {ROW | ROWS}
-FETCH {FIRST | NEXT} fetch_row_count {ROW | ROWS} ONLY
+-- menampilkan tabel populasi untuk posisi ke 6, 7 dan 8 berdasarkan jumlah kelurahan
+SELECT * FROM populasi ORDER BY kel LIMIT 5, 3
 
-- Klausa OFFSET menentukan jumlah baris yang akan dilewati sebelum mulai mengembalikan baris dari kueri. offset_row_countBisa berupa konstanta, variabel, atau parameter yang lebih besar atau sama dengan nol .
-- Klausa FETCH menentukan jumlah baris yang akan dikembalikan setelah OFFSETklausa diproses. Can fetch_row_countadalah konstanta, variabel atau skalar yang lebih besar atau sama dengan satu.
--Klausa OFFSET bersifat wajib sedangkan FETCHklausa bersifat opsional. Juga, FIRSTdan NEXTadalah sinonim masing-masing sehingga Anda dapat menggunakannya secara bergantian. Demikian pula, Anda dapat menggunakan  FIRSTdan NEXTsecara bergantian.
-
-klausa fetch dan offset sering digunakan untuk proses paggination pada data
- 
-*/
-
--- menampilkan 3 data pertama dan mengembalikan sisanya, gunakan klausa ofset
-
-SELECT * FROM populasi ORDER BY kec OFFSET 3 ROWS
-
--- menampilkan 3 data pertama dan 2 data berikutnya diurutkan berdasarkan luas, gunakan kalusa offset dan fetch 
-
-SELECT * FROM populasi ORDER BY luas OFFSET 3 FETCH NEXT 3 ROWS ONLY
+-- menampilkan provinsi urutan 5 dan 6 jika dihitung berdasarkan luas wilayah
+SELECT * FROM provinsi ORDER BY wilayah ASC LIMIT 4, 2
 
 /*
    SELECT WHERE adalah perintah yang digunakan untuk melakukan filterisasi atau membatasi data yang ditampilkan
