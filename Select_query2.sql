@@ -54,6 +54,46 @@ SELECT * FROM populasi WHERE kota not in ('Jakarta', 'Bandung', 'Medan')
 -- ibukota pada table daftar_provinsi
 SELECT * FROM populasi WHERE kota in (SELECT ibukota FROM daftar_provinsi)
 
+CREATE TABLE Kota(
+	id int AUTO_INCREMENT not null,
+  	kota varchar(30) not null,
+  	PRIMARY KEY(id)
+)
+
+CREATE TABLE Student(
+	id int AUTO_INCREMENT not null,
+  	nama varchar(30) not null,
+  	usia int not null,
+  	asal varchar(30) not null,
+  	PRIMARY KEY(id)
+)
+
+INSERT INTO Kota VALUES
+(1, 'Cirebon'),
+(2, 'Makassar'),
+(3, 'Surabaya'),
+(4, 'Bandung'),
+(5, 'Jakarta'),
+(6, 'Tangerang'),
+(7, 'Bekasi'),
+(8, 'Denpasar'),
+(9, 'Cianjur'),
+(10, 'Kuningan')
+
+INSERT INTO Student VALUES
+(1, 'Udin', 34, 'Cianjur'),
+(2, 'Eka', 21, 'Denpasar'),
+(3, 'Bambang', 45,'Bekasi'),
+(4, 'Satrio', 32,'Pinrang'),
+(5, 'David', 26,'Cirebon')
+
+
+-- Tampilkan data murid yang berasal dari kota berdasarkan nama kota dari table Kota 
+SELECT * from Student where asal in (SELECT kota FROM Kota)
+
+-- Tampilkan data murid yang bukan berasal dari nama kota dari table Kota 
+SELECT * FROM Student WHERE asal NOT IN (SELECT kota FROM Kota)
+
 /*
 	Query ANY dan SOME berfungsi untuk mengecek salah satu data himpunan subquery. format penulisan query
     
