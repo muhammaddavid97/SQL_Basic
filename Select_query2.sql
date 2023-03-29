@@ -97,6 +97,9 @@ SELECT * FROM Student WHERE asal NOT IN (SELECT kota FROM Kota)
 -- Tampilkan data kota dari table Kota berdasarkan asal student 
 SELECT * FROM Kota WHERE Kota IN (SELECT asal FROM Student)
 
+-- Tampilkan seluruh data murid yang berasal dari salah satu kota di table Kota
+SELECT * FROM Student WHERE asal = ANY(SELECT kota FROM Kota)
+
 /*
     Query Any, Some dan All memiliki fungsi yang sama seperti query IN dimana query ini berfungsi untuk menampilkan data berdasarkan himpunan
     dari hasil subquery. Ketiga query ini dapat menggunakan operator perbandingan
@@ -113,6 +116,9 @@ SELECT * FROM populasi WHERE kota = ANY (SELECT ibukota FROM daftar_provinsi)
 
 -- Tampilkan seluruh data pada table student dimana nama kotanya sama dengan salah satu himpunan nama kota pada table KotaStudent
 SELECT * FROM Student WHERE asal = ANY(SELECT kota FROM Kota)
+
+-- Tampilkan seluruh data murid yang bukan berasal dari kota di table Kota
+SELECT * FROM Student WHERE asal != ALL (SELECT kota FROM Kota)
 
 /*
 	SELECT EXIST berfungsi untuk memeriksa sebuah subquery apakah datanya ada atau tidak, jika ada maka mengembalikasn true
